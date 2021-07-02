@@ -15,10 +15,33 @@ class ContentViewModel: ObservableObject {
         ["1", "2", "3", "+"],
         [".", "0", "", "="]
     ]
+    var calculator: Calculator = Calculator()
 
     @Published var displayedValue: String = "0"
     
     func action(_ key: String) {
-        print("✅", key)
+        guard let operation = Operation(key) else { return }
+        switch operation {
+        case .result:
+            displayedValue = "\(calculator.conclude())"
+        case .allClear:
+            calculator.operations.removeAll()
+            displayedValue = "0"
+        case .number, .decimalPoint:
+            if calculator.operations.isEmpty {
+                calculator.operations.append([operation])
+            } else {
+                let operations = calculator.operations.removeLast()
+                if operations.first?.isValueType == true {
+                    calculator.operations.append(operations + [operation])
+                } else {
+                    calculator.operations.append(contentsOf:[operations, [operation]])
+                }
+            }
+            displayedValue = calculator.lastOperationAsString()
+        default:
+            calculator.operations.append([operation])
+            displayedValue = operation.asString
+        }
     }
 }

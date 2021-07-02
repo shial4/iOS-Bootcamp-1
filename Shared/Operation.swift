@@ -17,6 +17,34 @@ enum Operation {
     case allClear
     case number(Int)
     
+    var isValueType: Bool {
+        switch self {
+        case .number, .decimalPoint:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var asString: String {
+        switch self {
+        case .addition:
+            return "+"
+        case .subtraction:
+            return "-"
+        case .multiplication:
+            return "*"
+        case .division:
+            return "\\"
+        case .number(let value):
+            return "\(value)"
+        case .decimalPoint:
+            return "."
+        default:
+            return "Error"
+        }
+    }
+    
     init?(_ key: String) {
         switch key {
         case "+":
