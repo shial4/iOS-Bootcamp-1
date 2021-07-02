@@ -19,7 +19,7 @@ class Calculator {
     
     /// Compute result in consecutive order.
     /// Do not respect operation priority here.
-    /// Assume user thinks As they are computed on the go every time he performs operation
+    /// Assume user thinks as they are computed on the go every time they perform operation
     /// - Returns: Concluded operation result
     func conclude() -> Any {
         var result: Double = 0
