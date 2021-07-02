@@ -45,17 +45,23 @@ struct ContentView: View {
         }
     }
     
-    func keyboardButton(key: String, action: (String) -> Void) -> some View {
+    func keyboardButton(key: String, action: @escaping (String) -> Void) -> some View {
         Circle()
             .fill(key.isEmpty ? Color.clear : Color.white)
             .overlay(Text(key))
             .disabled(key.isEmpty)
             .frame(width: 44, height: 44)
+            .onTapGesture {
+                action(key)
+            }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView()
+            ContentView()
+        }
     }
 }
