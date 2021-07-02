@@ -14,6 +14,8 @@ extension Double {
 }
 
 class Calculator {
+    /// Could be done with simply storing last operation
+    /// and always conclude result on the go
     var operations: [[Operation]] = []
     
     /// Compute result in consecutive order.
