@@ -16,7 +16,6 @@ extension Double {
 class Calculator {
     var operations: [[Operation]] = []
     
-    
     /// Compute result in consecutive order.
     /// Do not respect operation priority here.
     /// Assume user thinks as they are computed on the go every time they perform operation
@@ -30,6 +29,7 @@ class Calculator {
                 let stringValue = operations.reduce("") { $0 + $1.asString }
                 if let next = nextOperation {
                     result = performOperation(next, lhs: result, rhs: Double(stringValue) ?? 0)
+                    nextOperation = nil
                 } else {
                     result = Double(stringValue) ?? 0
                 }
