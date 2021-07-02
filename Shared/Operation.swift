@@ -14,6 +14,7 @@ enum Operation {
     case division
     case decimalPoint
     case result
+    case clear
     case allClear
     case number(Int)
     
@@ -59,6 +60,8 @@ enum Operation {
             self = .decimalPoint
         case "=":
             self = .result
+        case "C":
+            self = .clear
         case "AC":
             self = .allClear
         case let key where Int(key) != nil:

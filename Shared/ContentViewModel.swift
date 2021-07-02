@@ -9,7 +9,7 @@ import Foundation
 
 class ContentViewModel: ObservableObject {
     let rows = [
-        ["AC", "", "", "÷"],
+        ["C", "AC", "", "÷"],
         ["7", "8", "9", "×"],
         ["4", "5", "6", "−"],
         ["1", "2", "3", "+"],
@@ -24,6 +24,9 @@ class ContentViewModel: ObservableObject {
         switch operation {
         case .result:
             displayedValue = "\(calculator.conclude())"
+        case .clear:
+            calculator.operations.removeLast()
+            displayedValue = calculator.lastOperationAsString()
         case .allClear:
             calculator.operations.removeAll()
             displayedValue = "0"
